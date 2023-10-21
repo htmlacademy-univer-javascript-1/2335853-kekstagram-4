@@ -1,8 +1,6 @@
 const convertTimeToMinutes = (time) => {
-  const hours = parseInt(time.split(':')[0], 10);
-  const minutes = parseInt(time.split(':')[1], 10);
-  const result = hours * 60 + minutes;
-  return result;
+  const [hours, minutes] = time.split(':').map((element) => parseInt(element, 10));
+  return hours * 60 + minutes;
 };
 
 const checkWorkingSchedule = (dayStart, dayEnd, meetingStart, meetingDuration) => {
