@@ -1,4 +1,5 @@
 import { createPosts } from './data.js';
+import { showBigPicture } from './big-picture.js';
 
 const pictureList = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -6,14 +7,15 @@ const pictureTemplate = document.querySelector('#picture').content.querySelector
 const renderPicture = (post) => {
   const newPicture = pictureTemplate.cloneNode(true);
 
-  const postImage = newPicture.querySelector('.picture__img');
-  const postLikes = newPicture.querySelector('.picture__likes');
-  const postComments = newPicture.querySelector('.picture__comments');
+  newPicture.querySelector('.picture__img').src = post.url;
+  newPicture.querySelector('.picture__img').alt = post.description;
+  newPicture.querySelector('.picture__likes').textContent = post.likes;
+  newPicture.querySelector('.picture__comments').textContent = post.comments.length;
 
-  postImage.src = post.url;
-  postImage.alt = post.description;
-  postLikes.textContent = post.likes;
-  postComments.textContent = post.comments.length;
+  newPicture.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    showBigPicture(post);
+  });
 
   return newPicture;
 };
