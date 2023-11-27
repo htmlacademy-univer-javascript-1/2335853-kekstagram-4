@@ -1,5 +1,7 @@
 import { isEscapeKey } from './util.js';
 
+const COMMENTS_UPLOAD_AMOUNT = 5;
+
 const bigPicture = document.querySelector('.big-picture');
 const closeButton = bigPicture.querySelector('#picture-cancel');
 const bigPictureImage = bigPicture.querySelector('.big-picture__img').children[0];
@@ -10,6 +12,8 @@ const commentsList = bigPicture.querySelector('.social__comments');
 const socialCommentCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 
+let commentsAmount = COMMENTS_UPLOAD_AMOUNT;
+let allComments = [];
 
 const renderComment = (comment) => {
   const newComment = document.createElement('li');
@@ -32,14 +36,26 @@ const renderComment = (comment) => {
   return newComment;
 };
 
-const renderComments = (comments) => {
+const renderComments = () => {
   const commentsFragment = document.createDocumentFragment();
 
-  comments.forEach((comment) => {
-    commentsFragment.appendChild(renderComment(comment));
-  });
+  if (allComments.length < COMMENTS_UPLOAD_AMOUNT || commentsAmount >= allComments.length) {
+    commentsAmount = allComments.length;
+    commentsLoader.classList.add('hidden');
+  } else {
+    commentsLoader.classList.remove('hidden');
+  }
 
-  commentsList.innerHTML = '';
+  socialCommentCount.textContent = `${commentsAmount} из ${allComments.length} комментариев`;
+
+  const startIndex = (commentsAmount <= COMMENTS_UPLOAD_AMOUNT)
+    ? 0
+    : COMMENTS_UPLOAD_AMOUNT * Math.floor((commentsAmount - 1) / COMMENTS_UPLOAD_AMOUNT);
+
+  for (let i = startIndex; i < commentsAmount; i++) {
+    commentsFragment.appendChild(renderComment(allComments[i]));
+  }
+
   commentsList.appendChild(commentsFragment);
 };
 
@@ -51,7 +67,13 @@ const renderContent = (post) => {
   commentsCount.textContent = comments.length;
   pictureCaption.textContent = description;
 
-  renderComments(post.comments);
+  commentsList.innerHTML = '';
+  renderComments();
+};
+
+const onCommentsLoaderClick = () => {
+  commentsAmount += COMMENTS_UPLOAD_AMOUNT;
+  renderComments();
 };
 
 const onDocumentEscKeydown = (evt) => {
@@ -69,6 +91,7 @@ function hideBigPicture () {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
 
+  commentsLoader.removeEventListener('click', onCommentsLoaderClick);
   closeButton.removeEventListener('click', onCloseButtonClick);
   document.removeEventListener('keydown', onDocumentEscKeydown);
 }
@@ -76,11 +99,12 @@ function hideBigPicture () {
 function showBigPicture (post) {
   document.body.classList.add('modal-open');
   bigPicture.classList.remove('hidden');
-  socialCommentCount.classList.add('hidden');
-  commentsLoader.classList.add('hidden');
 
+  commentsAmount = COMMENTS_UPLOAD_AMOUNT;
+  allComments = post.comments;
   renderContent(post);
 
+  commentsLoader.addEventListener('click', onCommentsLoaderClick);
   closeButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onDocumentEscKeydown);
 }
