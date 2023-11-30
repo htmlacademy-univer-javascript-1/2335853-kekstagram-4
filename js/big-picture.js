@@ -3,7 +3,7 @@ import { isEscapeKey } from './util.js';
 const COMMENTS_UPLOAD_AMOUNT = 5;
 
 const bigPicture = document.querySelector('.big-picture');
-const closeButton = bigPicture.querySelector('#picture-cancel');
+const pictureCloseButton = bigPicture.querySelector('#picture-cancel');
 const bigPictureImage = bigPicture.querySelector('.big-picture__img').children[0];
 const likesCount = bigPicture.querySelector('.likes-count');
 const commentsCount = bigPicture.querySelector('.comments-count');
@@ -83,7 +83,7 @@ const onDocumentEscKeydown = (evt) => {
   }
 };
 
-const onCloseButtonClick = () => {
+const onPictureCloseClick = () => {
   hideBigPicture();
 };
 
@@ -92,7 +92,7 @@ function hideBigPicture () {
   document.body.classList.remove('modal-open');
 
   commentsLoader.removeEventListener('click', onCommentsLoaderClick);
-  closeButton.removeEventListener('click', onCloseButtonClick);
+  pictureCloseButton.removeEventListener('click', onPictureCloseClick);
   document.removeEventListener('keydown', onDocumentEscKeydown);
 }
 
@@ -105,7 +105,7 @@ function showBigPicture (post) {
   renderContent(post);
 
   commentsLoader.addEventListener('click', onCommentsLoaderClick);
-  closeButton.addEventListener('click', onCloseButtonClick);
+  pictureCloseButton.addEventListener('click', onPictureCloseClick);
   document.addEventListener('keydown', onDocumentEscKeydown);
 }
 
