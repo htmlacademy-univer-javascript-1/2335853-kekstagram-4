@@ -15,7 +15,7 @@ const sendData = (evt) => {
   const formData = new FormData(evt.target);
 
   fetch(
-    'https://29.javascript.pages.academy/kekstagra',
+    'https://29.javascript.pages.academy/kekstagram',
     {
       method: 'POST',
       body: formData
