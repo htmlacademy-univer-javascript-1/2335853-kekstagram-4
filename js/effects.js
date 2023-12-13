@@ -1,4 +1,4 @@
-import * as filters from './filters.js';
+import * as filters from './effects-settings.js';
 
 const imagePreview = document.querySelector('.img-upload__preview').children[0];
 const effectLevelForm = document.querySelector('.img-upload__effect-level');
@@ -37,6 +37,8 @@ const showSlider = () => {
 const hideSlider = () => {
   effectLevelForm.classList.add('hidden');
 };
+
+hideSlider();
 
 const setCurrentEffect = (effect) => {
   currentEffect = effect;
