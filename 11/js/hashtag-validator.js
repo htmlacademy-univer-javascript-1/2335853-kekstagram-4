@@ -29,7 +29,7 @@ const validateHashtags = (value) => {
       if (hashtag[0] !== '#') {
         currentError = 'Хэштег должен начинаться со знака решетки';
       } else if (hashtag.length === 1) {
-        currentError = 'Тело хэштега должно содержать не меньше одного символа';
+        currentError = 'Тело хэштега должно содержать не менее одного символа';
       } else if (hashtag.length > MAX_HASHTAG_LENGTH) {
         currentError = 'Хэштег должен быть не длиннее 20 символов';
       } else {
