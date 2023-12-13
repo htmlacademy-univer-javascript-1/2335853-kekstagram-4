@@ -1,4 +1,3 @@
-import { createPosts } from './data.js';
 import { showBigPicture } from './big-picture.js';
 
 const pictureList = document.querySelector('.pictures');
@@ -20,11 +19,10 @@ const renderPicture = (post) => {
   return newPicture;
 };
 
-const renderPictures = () => {
+const renderPictures = (data) => {
   const fragment = document.createDocumentFragment();
-  const generatedData = createPosts();
 
-  generatedData.forEach((post) => {
+  data.forEach((post) => {
     fragment.appendChild(renderPicture(post));
   });
 

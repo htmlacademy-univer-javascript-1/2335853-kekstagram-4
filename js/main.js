@@ -1,4 +1,5 @@
 import './form.js';
+import { getData } from './api.js';
 import { renderPictures } from './pictures.js';
 
-renderPictures();
+getData(renderPictures);

@@ -3,7 +3,8 @@ import './comment-validator.js';
 import { isEscapeKey } from './util.js';
 import { pristine } from './validation.js';
 import { hideSlider, setCurrentEffect, updateImageFilter } from './effects.js';
-import { DEFAULT } from './filters.js';
+import { DEFAULT } from './effects-settings.js';
+import { sendData } from './api.js';
 
 const MIN_SCALE_VALUE = 25;
 const MAX_SCALE_VALUE = 100;
@@ -18,7 +19,9 @@ const scaleInputField = imageEdit.querySelector('.scale__control--value');
 const scaleDecreaseButton = imageEdit.querySelector('.scale__control--smaller');
 const scaleIncreaseButton = imageEdit.querySelector('.scale__control--bigger');
 
-let currentScale;
+let currentScale = MAX_SCALE_VALUE;
+
+imageUploadForm.addEventListener('submit', sendData);
 
 const onEditorEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -40,25 +43,32 @@ const updateScale = () => {
   changeImageScale();
 };
 
-const showEditor = () => {
-  document.body.classList.add('modal-open');
-  imageEdit.classList.remove('hidden');
-
+const clearForm = () => {
+  imageUploadForm.reset();
   currentScale = MAX_SCALE_VALUE;
   setCurrentEffect(DEFAULT);
   updateScale();
   updateImageFilter();
   hideSlider();
+};
+
+const showEditor = () => {
+  document.body.classList.add('modal-open');
+  imageEdit.classList.remove('hidden');
+
+  updateScale();
 
   editorCloseButton.addEventListener('click', onEditorCloseClick);
   document.addEventListener('keydown', onEditorEscKeydown);
 };
 
-function closeEditor () {
+function closeEditor (clear = true) {
   document.body.classList.remove('modal-open');
   imageEdit.classList.add('hidden');
 
-  imageUploadForm.reset();
+  if (clear) {
+    clearForm();
+  }
 
   editorCloseButton.removeEventListener('click', onEditorCloseClick);
   document.removeEventListener('keydown', onEditorEscKeydown);
@@ -87,3 +97,5 @@ const onIncreaseClick = () => {
 
 scaleDecreaseButton.addEventListener('click', onDecreaseClick);
 scaleIncreaseButton.addEventListener('click', onIncreaseClick);
+
+export { closeEditor, showEditor };
