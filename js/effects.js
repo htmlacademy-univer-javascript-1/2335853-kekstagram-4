@@ -18,6 +18,10 @@ noUiSlider.create(effectSlider, {
     min: 0,
     max: 100,
   },
+  format: {
+    to: (value) => value,
+    from: (value) => parseFloat(value).toFixed(1)
+  },
   start: 100,
   step: 1,
   connect: 'lower',

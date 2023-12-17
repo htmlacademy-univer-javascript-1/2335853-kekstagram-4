@@ -5,8 +5,8 @@ import { filterPictures, hideFilters, showFilters } from './filters.js';
 
 getData()
   .then((data) => {
-    closeMessage();
     filterPictures(data);
+    closeMessage();
     showFilters();
   })
   .catch(() => {

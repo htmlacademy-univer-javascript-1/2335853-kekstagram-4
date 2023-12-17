@@ -1,7 +1,7 @@
 import './hashtag-validator.js';
 import './comment-validator.js';
-import { isEscapeKey } from './util.js';
 import { pristine } from './validation.js';
+import { isEscapeKey } from './util.js';
 import { hideSlider, setCurrentEffect, updateImageFilter } from './effects.js';
 import { DEFAULT } from './effects-settings.js';
 import { sendData } from './api.js';
@@ -54,6 +54,7 @@ const updateScale = () => {
 
 const clearForm = () => {
   imageUploadForm.reset();
+  pristine.reset();
   currentScale = MAX_SCALE_VALUE;
   setCurrentEffect(DEFAULT);
   updateScale();
@@ -84,7 +85,6 @@ function closeEditor (clear = true) {
 }
 
 const onImageUpload = () => {
-  pristine.validate();
   setPicturePreview(imageInputField, imagePreview);
   showEditor();
 };

@@ -12,6 +12,7 @@ const checkValidation = () => {
   if (!pristine.validate()) {
     submitButton.setAttribute('disabled', '');
   } else {
+    pristine.reset();
     submitButton.removeAttribute('disabled');
   }
 };
