@@ -1,4 +1,6 @@
-const FILE_TYPES = ['.jpg', '.jpeg', '.png'];
+const FILE_TYPES = ['.gif', '.jpg', '.jpeg', '.png'];
+
+const effectsPreview = document.querySelectorAll('.effects__preview');
 
 const setPicturePreview = (fileInput, preview) => {
   const file = fileInput.files[0];
@@ -7,7 +9,9 @@ const setPicturePreview = (fileInput, preview) => {
   const matches = FILE_TYPES.some((extension) => fileName.endsWith(extension));
 
   if (matches) {
-    preview.src = URL.createObjectURL(file);
+    const fileUrl = URL.createObjectURL(file);
+    preview.src = fileUrl;
+    effectsPreview.forEach((effectPreview) => { effectPreview.style.backgroundImage = `url(${fileUrl})`; });
   }
 };
 
