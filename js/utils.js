@@ -27,8 +27,6 @@ const debounce = (callback, timeoutDelay = RENDER_DELAY) => {
 };
 
 export {
-  getRandomInteger,
-  getRandomArrayElement,
   getRandomArrayElementsInAmount,
   isEscapeKey,
   debounce

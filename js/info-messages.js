@@ -1,4 +1,4 @@
-import { isEscapeKey } from './util.js';
+import { isEscapeKey } from './utils.js';
 import { closeEditor, showEditor } from './form.js';
 
 const serverErrorTemplate = document.querySelector('#server_error').content.querySelector('.server_error');

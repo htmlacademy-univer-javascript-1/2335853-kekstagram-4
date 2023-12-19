@@ -1,5 +1,5 @@
 import { clearPictures, renderPictures } from './pictures.js';
-import { debounce, getRandomArrayElementsInAmount } from './util.js';
+import { debounce, getRandomArrayElementsInAmount } from './utils.js';
 
 const RANDOM_PICTURES_COUNT = 10;
 const ACTIVE_CLASS = 'img-filters__button--active';
