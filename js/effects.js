@@ -1,15 +1,16 @@
 import * as filters from './effects-settings.js';
 
 const imagePreview = document.querySelector('.img-upload__preview').children[0];
-const effectLevelForm = document.querySelector('.img-upload__effect-level');
-const effectLevel = document.querySelector('.effect-level__value');
-const effectSlider = document.querySelector('.effect-level__slider');
-const noEffects = document.querySelector('#effect-none');
-const chromeEffect = document.querySelector('#effect-chrome');
-const sepiaEffect = document.querySelector('#effect-sepia');
-const marvinEffect = document.querySelector('#effect-marvin');
-const phobosEffect = document.querySelector('#effect-phobos');
-const heatEffect = document.querySelector('#effect-heat');
+const effectLevelFieldset = document.querySelector('.img-upload__effect-level');
+const effectsFieldset = document.querySelector('.img-upload__effects');
+const effectLevel = effectLevelFieldset.querySelector('.effect-level__value');
+const effectSlider = effectLevelFieldset.querySelector('.effect-level__slider');
+const noEffects = effectsFieldset.querySelector('#effect-none');
+const chromeEffect = effectsFieldset.querySelector('#effect-chrome');
+const sepiaEffect = effectsFieldset.querySelector('#effect-sepia');
+const marvinEffect = effectsFieldset.querySelector('#effect-marvin');
+const phobosEffect = effectsFieldset.querySelector('#effect-phobos');
+const heatEffect = effectsFieldset.querySelector('#effect-heat');
 
 let currentEffect = filters.DEFAULT;
 
@@ -35,11 +36,11 @@ const updateImageFilter = () => {
 };
 
 const showSlider = () => {
-  effectLevelForm.classList.remove('hidden');
+  effectLevelFieldset.classList.remove('hidden');
 };
 
 const hideSlider = () => {
-  effectLevelForm.classList.add('hidden');
+  effectLevelFieldset.classList.add('hidden');
 };
 
 hideSlider();

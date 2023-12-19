@@ -1,9 +1,11 @@
 import { pristine, checkValidation } from './validation.js';
 
+const MAX_COMMENT_LENGTH = 140;
+
 const commentInput = document.querySelector('.text__description');
 
 const validateComment = (value) => {
-  if (value.length > 140) {
+  if (value.length > MAX_COMMENT_LENGTH) {
     return false;
   }
   return true;

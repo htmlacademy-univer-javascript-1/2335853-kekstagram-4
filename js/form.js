@@ -1,7 +1,7 @@
 import './hashtag-validator.js';
 import './comment-validator.js';
-import { pristine } from './validation.js';
-import { isEscapeKey } from './util.js';
+import { checkValidation, pristine } from './validation.js';
+import { isEscapeKey } from './utils.js';
 import { hideSlider, setCurrentEffect, updateImageFilter } from './effects.js';
 import { DEFAULT } from './effects-settings.js';
 import { sendData } from './api.js';
@@ -67,6 +67,7 @@ const showEditor = () => {
   imageEdit.classList.remove('hidden');
 
   updateScale();
+  checkValidation();
 
   editorCloseButton.addEventListener('click', onEditorCloseClick);
   document.addEventListener('keydown', onEditorEscKeydown);
